@@ -523,6 +523,71 @@
     .footer-bottom { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
     .footer-bottom p { font-size: 12px; color: var(--gray-600); }
 
+    /* ===== SUCCEEDING PLAYERS ===== */
+    .sp-reviews-header { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+    .reviews-grid { display: grid; gap: 24px; margin-bottom: 48px; }
+    @media (min-width: 768px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .review-card {
+      border-radius: 16px; padding: 28px; position: relative; overflow: hidden; transition: all 0.5s;
+    }
+    .review-card:hover { border-color: rgba(124,58,237,0.2) !important; }
+    .review-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--accent));
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: white; flex-shrink: 0;
+    }
+    .review-name { font-size: 15px; font-weight: 700; color: white; }
+    .review-role { font-size: 12px; color: var(--gray-400); }
+    .review-text { font-size: 14px; color: var(--gray-300); line-height: 1.7; font-style: italic; }
+    .review-media { margin-top: 16px; border-radius: 10px; overflow: hidden; max-height: 200px; }
+    .review-media img, .review-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Review form */
+    .review-form-wrap {
+      max-width: 600px; margin: 0 auto; border-radius: 16px; padding: 32px;
+    }
+    .review-form-title { font-size: 20px; font-weight: 700; color: white; margin-bottom: 6px; text-align: center; }
+    .review-form-desc { font-size: 14px; color: var(--gray-400); margin-bottom: 24px; text-align: center; }
+
+    .review-form { display: flex; flex-direction: column; gap: 16px; }
+    .review-form input, .review-form textarea {
+      width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; color: white; font-family: 'Inter', sans-serif; font-size: 14px;
+      transition: border-color 0.3s; outline: none; resize: vertical;
+    }
+    .review-form input::placeholder, .review-form textarea::placeholder { color: var(--gray-500); }
+    .review-form input:focus, .review-form textarea:focus { border-color: var(--purple); }
+    .review-form textarea { min-height: 100px; }
+
+    .review-form-row { display: flex; gap: 12px; }
+    @media (max-width: 640px) { .review-form-row { flex-direction: column; } }
+    .review-form-row input { flex: 1; }
+
+    .review-file-label {
+      display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer;
+      background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: 10px; color: var(--gray-400); font-size: 13px; transition: all 0.3s;
+    }
+    .review-file-label:hover { border-color: var(--purple); color: var(--gray-300); }
+    .review-file-label input { display: none; }
+
+    .review-submit {
+      padding: 14px 28px; background: var(--purple); color: white; font-weight: 700;
+      font-size: 14px; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.03em;
+      clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 11px 100%, 0 calc(100% - 11px));
+      transition: all 0.3s; align-self: center;
+    }
+    .review-submit:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    .review-preview { display: none; margin-top: 8px; border-radius: 10px; overflow: hidden; max-height: 150px; }
+    .review-preview img, .review-preview video { max-width: 100%; max-height: 150px; object-fit: cover; border-radius: 10px; }
+
+    .review-success {
+      display: none; text-align: center; padding: 24px; color: var(--accent); font-weight: 600; font-size: 15px;
+    }
+
     /* ===== SVG ICON HELPER ===== */
     .icon-ig { display: inline-block; vertical-align: middle; }
   </style>
@@ -542,6 +607,7 @@
         <div class="nav-logo-text">Next Level <em>Ball</em></div>
       </a>
       <div class="nav-links">
+        <a href="#about-us">About</a>
         <a href="#what-we-do">What We Do</a>
         <a href="#benefits">Benefits</a>
         <a href="#why-nlb">Why NLB</a>
@@ -560,6 +626,7 @@
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
+  <a href="#about-us" onclick="closeMobile()">About</a>
   <a href="#what-we-do" onclick="closeMobile()">What We Do</a>
   <a href="#benefits" onclick="closeMobile()">Benefits</a>
   <a href="#why-nlb" onclick="closeMobile()">Why NLB</a>
@@ -608,7 +675,7 @@
 
   <!-- Liquid Glass Consultation Card - bottom left -->
   <div class="hero-consult-card">
-    <div class="consult-title">Book a Free Consultation</div>
+    <div class="consult-title">Book a Consultation</div>
     <div class="consult-desc">Get personalized guidance on your game. Talk to us about your goals and next steps.</div>
     <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="btn-clipped consult-btn">
       <!-- Phone icon (lucide-style) -->
@@ -619,6 +686,18 @@
 
   <div class="scroll-indicator">
     <div class="scroll-mouse"><div class="scroll-mouse-dot"></div></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT US ===== -->
+<section id="about-us" class="section-pad court-surface">
+  <div class="court-divider" style="position:absolute;top:0;left:0;right:0"></div>
+  <div class="container">
+    <div style="max-width:800px">
+      <p class="section-label anim-hidden">About Us</p>
+      <h2 class="section-title anim-hidden">Who We Are</h2>
+      <p class="section-desc anim-hidden" style="line-height:1.85">My role is to cut through the confusion and precisely define the best route for competitive improvement and development of a player. Academies, parents, and coaches often know what they need to fix but not how. My team and I provide that definitive strategy, addressing the mental part, instilling the importance of fitness, and correcting fundamental misconceptions that currently lead to wrong results. Finding the right coaching environment is the most critical investment a player can make. To ensure my clients make informed decisions, here is a breakdown of the essential parameters, common misconceptions, and the structural realities of the modern tennis academy.</p>
+    </div>
   </div>
 </section>
 
@@ -648,8 +727,8 @@
           <div class="wwd-card-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
-          <h3>Strategic Guidance</h3>
-          <p>Every player needs a framework. We design strategies that match your level, goals and competitive reality.</p>
+          <h3>Tactical Guidance</h3>
+          <p>Tactics can not failure. To think that the technical part can't failure is a mistake. One big misconception that encourages player to think that perfection is the name of the game. Nadal did not have a perfect ground strokes neither than Borg, Connors, McEnroe, Laver, Vilas, Bartoli, Pierce, Graf, etc.</p>
         </div>
       </div>
       <div class="wwd-card glass-card anim-hidden">
@@ -659,7 +738,7 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <h3>Performance Tracking</h3>
-          <p>Improvement is measurable. We help you track real progress and adjust with intention — not instinct alone.</p>
+          <p>We don't want our player to be good at the town or academy they play at. We want them to succeed, and be great competitors everywhere. The fact is simple the court the balls the rules the are the same everywhere in the world. Therefore your tennis has to be great outside our doors.</p>
         </div>
       </div>
       <div class="wwd-card glass-card anim-hidden">
@@ -710,11 +789,6 @@
         <span class="benefit-num">05</span>
         <h3>Professional Criteria</h3>
         <p>Decisions backed by experience and analysis. Not trends, not opinions — real criteria.</p>
-      </div>
-      <div class="benefit-card anim-hidden">
-        <span class="benefit-num">06</span>
-        <h3>Strategic Guidance</h3>
-        <p>A partner in your corner who sees the big picture and helps you navigate every stage.</p>
       </div>
     </div>
   </div>
@@ -833,7 +907,7 @@
   <div class="container">
     <div class="sp-header">
       <p class="section-label anim-hidden">Content & Community</p>
-      <h2 class="section-title anim-hidden">Improve with Intent</h2>
+      <h2 class="section-title anim-hidden">Improve with <span style="color:var(--purple)">Intent</span></h2>
       <p class="section-desc anim-hidden">Every piece of content is designed to give you an edge. Analysis, strategy, mindset — delivered with clarity and purpose.</p>
     </div>
     <div class="reel-grid">
@@ -849,7 +923,7 @@
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-        <div class="reel-content"><div class="reel-tag">Tactics</div><div class="reel-title">Match Strategy</div></div>
+        <div class="reel-content"><div class="reel-tag">Strategy</div><div class="reel-title">Match Strategy</div></div>
       </a>
       <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="reel-card anim-hidden-scale" style="transition-delay:0.16s">
         <div class="reel-bg" style="background:linear-gradient(to bottom, rgba(124,58,237,0.3), var(--dark))"></div>
@@ -877,13 +951,72 @@
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-        <div class="reel-content"><div class="reel-tag">Strategy</div><div class="reel-title">Court Awareness</div></div>
+        <div class="reel-content"><div class="reel-tag">Tactics</div><div class="reel-title">Court Awareness</div></div>
       </a>
     </div>
     <div class="community-row anim-hidden">
       <div class="community-stat"><div class="community-dot"></div><span class="community-label">Growing Community</span></div>
       <div class="community-stat"><div class="community-dot"></div><span class="community-label">Weekly Content</span></div>
       <div class="community-stat"><div class="community-dot"></div><span class="community-label">Real Progress</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUCCEEDING PLAYERS ===== -->
+<section id="succeeding-players" class="section-pad court-surface">
+  <div class="court-divider" style="position:absolute;top:0;left:0;right:0"></div>
+  <div class="container">
+    <div class="sp-reviews-header">
+      <p class="section-label anim-hidden">Testimonials</p>
+      <h2 class="section-title anim-hidden">Succeeding <span style="color:var(--accent)">Players</span></h2>
+      <p class="section-desc anim-hidden">Real stories from players who made the shift. Read their experiences, see their progress.</p>
+    </div>
+
+    <!-- Reviews grid -->
+    <div class="reviews-grid" id="reviewsGrid">
+      <!-- Placeholder reviews -->
+      <div class="review-card glass-card anim-hidden">
+        <div class="review-card-header">
+          <div class="review-avatar">M</div>
+          <div><div class="review-name">Marco T.</div><div class="review-role">Competitive Player</div></div>
+        </div>
+        <p class="review-text">"The clarity I got from NLB changed my approach completely. I stopped wasting time on things that didn't matter and started seeing real results in tournaments."</p>
+      </div>
+      <div class="review-card glass-card anim-hidden">
+        <div class="review-card-header">
+          <div class="review-avatar">S</div>
+          <div><div class="review-name">Sofia R.</div><div class="review-role">Junior Player</div></div>
+        </div>
+        <p class="review-text">"My parents and I were lost trying to find the right academy. NLB gave us the criteria to make the best decision. It was a game changer."</p>
+      </div>
+      <div class="review-card glass-card anim-hidden">
+        <div class="review-card-header">
+          <div class="review-avatar">D</div>
+          <div><div class="review-name">Daniel K.</div><div class="review-role">Amateur Competitor</div></div>
+        </div>
+        <p class="review-text">"I thought I needed to fix my technique. Turns out I needed a better tactical plan. NLB helped me understand that and my results improved fast."</p>
+      </div>
+    </div>
+
+    <!-- Submit review form -->
+    <div class="review-form-wrap glass-card">
+      <div class="review-form-title">Share Your Story</div>
+      <div class="review-form-desc">Tell the community about your experience and progress.</div>
+      <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
+        <div class="review-form-row">
+          <input type="text" id="revName" placeholder="Your name" required>
+          <input type="text" id="revRole" placeholder="Player level (e.g. Competitive, Junior)">
+        </div>
+        <textarea id="revText" placeholder="Write your review..." required></textarea>
+        <label class="review-file-label">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span id="fileLabel">Upload a photo or video (optional)</span>
+          <input type="file" id="revFile" accept="image/*,video/*" onchange="previewFile(this)">
+        </label>
+        <div class="review-preview" id="revPreview"></div>
+        <button type="submit" class="review-submit">Submit Review</button>
+      </form>
+      <div class="review-success" id="reviewSuccess">Thank you! Your review has been submitted.</div>
     </div>
   </div>
 </section>
@@ -972,6 +1105,68 @@ function closeMobile() {
   mobileToggle.classList.remove('open');
   mobileMenu.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+// ===== REVIEW FORM =====
+function previewFile(input) {
+  var preview = document.getElementById('revPreview');
+  var label = document.getElementById('fileLabel');
+  preview.innerHTML = '';
+  if (input.files && input.files[0]) {
+    var file = input.files[0];
+    label.textContent = file.name;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      preview.style.display = 'block';
+      if (file.type.startsWith('image/')) {
+        preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
+      } else if (file.type.startsWith('video/')) {
+        preview.innerHTML = '<video src="' + e.target.result + '" controls muted style="max-width:100%;max-height:150px;border-radius:10px"></video>';
+      }
+    };
+    reader.readAsDataURL(file);
+  } else {
+    label.textContent = 'Upload a photo or video (optional)';
+    preview.style.display = 'none';
+  }
+}
+
+function submitReview(e) {
+  e.preventDefault();
+  var name = document.getElementById('revName').value;
+  var role = document.getElementById('revRole').value || 'Player';
+  var text = document.getElementById('revText').value;
+  var fileInput = document.getElementById('revFile');
+  var grid = document.getElementById('reviewsGrid');
+
+  var card = document.createElement('div');
+  card.className = 'review-card glass-card visible';
+  var initial = name.charAt(0).toUpperCase();
+  var mediaHtml = '';
+
+  if (fileInput.files && fileInput.files[0]) {
+    var file = fileInput.files[0];
+    var url = URL.createObjectURL(file);
+    if (file.type.startsWith('image/')) {
+      mediaHtml = '<div class="review-media"><img src="' + url + '" alt="Player media"></div>';
+    } else if (file.type.startsWith('video/')) {
+      mediaHtml = '<div class="review-media"><video src="' + url + '" controls muted playsinline></video></div>';
+    }
+  }
+
+  card.innerHTML = '<div class="review-card-header"><div class="review-avatar">' + initial + '</div><div><div class="review-name">' + name + '</div><div class="review-role">' + role + '</div></div></div><p class="review-text">"' + text + '"</p>' + mediaHtml;
+  grid.insertBefore(card, grid.firstChild);
+
+  // Reset form
+  document.getElementById('reviewForm').reset();
+  document.getElementById('revPreview').style.display = 'none';
+  document.getElementById('revPreview').innerHTML = '';
+  document.getElementById('fileLabel').textContent = 'Upload a photo or video (optional)';
+
+  // Show success
+  var success = document.getElementById('reviewSuccess');
+  success.style.display = 'block';
+  setTimeout(function() { success.style.display = 'none'; }, 3000);
 }
 
 // ===== SCROLL REVEAL =====
