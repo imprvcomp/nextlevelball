@@ -58,6 +58,9 @@
       background-clip: text;
     }
 
+    .about-toggle.open .about-chevron { transform: rotate(180deg); }
+    .about-content.open { max-height: 500px !important; opacity: 1 !important; }
+
     .glass-card {
       background: rgba(255,255,255,0.03);
       backdrop-filter: blur(12px);
@@ -691,18 +694,6 @@
   </div>
 </section>
 
-<!-- ===== ABOUT US ===== -->
-<section id="about-us" class="section-pad court-surface">
-  <div class="court-divider" style="position:absolute;top:0;left:0;right:0"></div>
-  <div class="container">
-    <div style="max-width:800px">
-      <p class="section-label anim-hidden">About Us</p>
-      <h2 class="section-title anim-hidden">Who We Are</h2>
-      <p class="section-desc anim-hidden" style="line-height:1.85">My role is to cut through the confusion and precisely define the best route for competitive improvement and development of a player. Academies, parents, and coaches often know what they need to fix but not how. My team and I provide that definitive strategy, addressing the mental part, instilling the importance of fitness, and correcting fundamental misconceptions that currently lead to wrong results. Finding the right coaching environment is the most critical investment a player can make. To ensure my clients make informed decisions, here is a breakdown of the essential parameters, common misconceptions, and the structural realities of the modern tennis academy.</p>
-    </div>
-  </div>
-</section>
-
 <!-- ===== WHAT WE DO ===== -->
 <section id="what-we-do" class="section-pad">
   <div class="court-divider" style="position:absolute;top:0;left:0;right:0"></div>
@@ -811,9 +802,9 @@
     <div class="visual-statements">
       <p class="section-label anim-hidden">The Shift</p>
       <div style="display:flex;flex-direction:column;gap:16px">
-        <h3 class="visual-statement anim-hidden-left">From confusion to clarity.</h3>
-        <h3 class="visual-statement anim-hidden-left" style="transition-delay:0.2s">From effort to direction.</h3>
-        <h3 class="visual-statement anim-hidden-left" style="transition-delay:0.4s">From grinding to growing.</h3>
+        <h3 class="visual-statement anim-hidden-left">From confusion to <span class="gradient-text">clarity.</span></h3>
+        <h3 class="visual-statement anim-hidden-left" style="transition-delay:0.2s">From effort to <span class="gradient-text">direction.</span></h3>
+        <h3 class="visual-statement anim-hidden-left" style="transition-delay:0.4s">From grinding to <span class="gradient-text">growing.</span></h3>
       </div>
       <p class="visual-sub anim-hidden" style="transition-delay:0.6s">
         Every level demands a new standard.<br>
@@ -909,7 +900,7 @@
   <div class="container">
     <div class="sp-header">
       <p class="section-label anim-hidden">Content & Community</p>
-      <h2 class="section-title anim-hidden">Improve with <span style="color:var(--purple)">Intent</span></h2>
+      <h2 class="section-title anim-hidden">Improve with <span style="color:var(--accent)">Intent</span></h2>
       <p class="section-desc anim-hidden">Every piece of content is designed to give you an edge. Analysis, strategy, mindset — delivered with clarity and purpose.</p>
     </div>
     <div class="reel-grid">
@@ -1044,6 +1035,22 @@
       <span>Start Your Next Level</span>
     </a>
     <p class="final-trust anim-hidden">Performance begins with better decisions.</p>
+  </div>
+</section>
+
+<!-- ===== ABOUT US (collapsible) ===== -->
+<section id="about-us" class="section-pad" style="padding-top:60px;padding-bottom:60px">
+  <div class="container">
+    <div class="about-toggle anim-hidden" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="cursor:pointer;display:flex;align-items:center;gap:16px">
+      <h2 style="font-size:clamp(32px,5vw,56px);font-weight:900;color:white;letter-spacing:-1px">About Us</h2>
+      <svg class="about-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.4s ease"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="about-content" style="max-height:0;overflow:hidden;transition:max-height 0.6s ease,opacity 0.4s ease;opacity:0">
+      <div style="padding-top:24px;max-width:800px">
+        <h3 style="font-size:20px;font-weight:600;color:var(--accent);margin-bottom:12px;letter-spacing:1px">Who We Are</h3>
+        <p class="section-desc" style="line-height:1.85">My role is to cut through the confusion and precisely define the best route for competitive improvement and development of a player. Academies, parents, and coaches often know what they need to fix but not how. My team and I provide that definitive strategy, addressing the mental part, instilling the importance of fitness, and correcting fundamental misconceptions that currently lead to wrong results. Finding the right coaching environment is the most critical investment a player can make. To ensure my clients make informed decisions, here is a breakdown of the essential parameters, common misconceptions, and the structural realities of the modern tennis academy.</p>
+      </div>
+    </div>
   </div>
 </section>
 
