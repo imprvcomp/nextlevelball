@@ -476,6 +476,55 @@
     }
     .reel-card:hover .reel-hover-bg { opacity: 1; }
 
+    /* Video Modal */
+    .video-modal-overlay {
+      position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .video-modal-overlay.active { display: flex; opacity: 1; }
+    .video-modal {
+      background: var(--gray-800); border-radius: 16px; overflow: hidden;
+      max-width: 960px; width: 100%; max-height: 90vh;
+      border: 1px solid rgba(124,58,237,0.15);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+      display: flex; flex-direction: column;
+    }
+    @media (min-width: 768px) {
+      .video-modal { flex-direction: row; max-height: 80vh; }
+    }
+    .video-modal-player {
+      flex: 1.2; background: black; display: flex; align-items: center; justify-content: center;
+      min-height: 220px;
+    }
+    .video-modal-player video {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+    }
+    .video-modal-info {
+      flex: 1; padding: 28px 24px; display: flex; flex-direction: column; justify-content: center;
+      overflow-y: auto; max-height: 40vh;
+    }
+    @media (min-width: 768px) {
+      .video-modal-info { max-height: none; }
+    }
+    .video-modal-tag {
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .video-modal-title {
+      font-size: 22px; font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.3;
+    }
+    .video-modal-desc {
+      font-size: 15px; color: var(--gray-300); line-height: 1.75; font-style: italic;
+    }
+    .video-modal-close {
+      position: absolute; top: 16px; right: 16px; width: 40px; height: 40px;
+      border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+      color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; transition: background 0.2s; z-index: 10;
+    }
+    .video-modal-close:hover { background: rgba(255,255,255,0.15); }
+
     .community-row { display: flex; flex-direction: column; align-items: center; gap: 24px; }
     @media (min-width: 640px) { .community-row { flex-direction: row; justify-content: center; gap: 48px; } }
     .community-stat { display: flex; align-items: center; gap: 12px; }
@@ -904,48 +953,63 @@
       <p class="section-desc anim-hidden">Every piece of content is designed to give you an edge. Analysis, strategy, mindset — delivered with clarity and purpose.</p>
     </div>
     <div class="reel-grid">
-      <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="reel-card anim-hidden-scale">
+      <div class="reel-card anim-hidden-scale" onclick="openVideoModal(0)">
         <div class="reel-bg" style="background:linear-gradient(to bottom, rgba(124,58,237,0.3), var(--dark))"></div>
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         <div class="reel-content"><div class="reel-tag">Technique</div><div class="reel-title">Serve Analysis</div></div>
-      </a>
-      <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="reel-card anim-hidden-scale" style="transition-delay:0.08s">
+      </div>
+      <div class="reel-card anim-hidden-scale" style="transition-delay:0.08s" onclick="openVideoModal(1)">
         <div class="reel-bg" style="background:linear-gradient(to bottom, rgba(196,247,42,0.2), var(--dark))"></div>
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         <div class="reel-content"><div class="reel-tag">Strategy</div><div class="reel-title">Match Strategy</div></div>
-      </a>
-      <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="reel-card anim-hidden-scale" style="transition-delay:0.16s">
+      </div>
+      <div class="reel-card anim-hidden-scale" style="transition-delay:0.16s" onclick="openVideoModal(2)">
         <div class="reel-bg" style="background:linear-gradient(to bottom, rgba(124,58,237,0.3), var(--dark))"></div>
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         <div class="reel-content"><div class="reel-tag">Mindset</div><div class="reel-title">Mental Game</div></div>
-      </a>
-      <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="reel-card anim-hidden-scale" style="transition-delay:0.24s">
+      </div>
+      <div class="reel-card anim-hidden-scale" style="transition-delay:0.24s" onclick="openVideoModal(3)">
         <div class="reel-bg" style="background:linear-gradient(to bottom, rgba(196,247,42,0.2), var(--dark))"></div>
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-        <div class="reel-content"><div class="reel-tag">Movement</div><div class="reel-title">Footwork Drills</div></div>
-      </a>
-      <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="reel-card anim-hidden-scale" style="transition-delay:0.32s">
+        <div class="reel-content"><div class="reel-tag">Fitness</div><div class="reel-title">Duglas Cordero</div></div>
+      </div>
+      <div class="reel-card anim-hidden-scale" style="transition-delay:0.32s" onclick="openVideoModal(4)">
         <div class="reel-bg" style="background:linear-gradient(to bottom, rgba(124,58,237,0.3), var(--dark))"></div>
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         <div class="reel-content"><div class="reel-tag">Improvement</div><div class="reel-title">Return of Serve</div></div>
-      </a>
-      <a href="https://www.instagram.com/nextlevelball_/" target="_blank" rel="noopener noreferrer" class="reel-card anim-hidden-scale" style="transition-delay:0.4s">
+      </div>
+      <div class="reel-card anim-hidden-scale" style="transition-delay:0.4s" onclick="openVideoModal(5)">
         <div class="reel-bg" style="background:linear-gradient(to bottom, rgba(196,247,42,0.2), var(--dark))"></div>
         <div class="reel-hover-bg"></div>
         <svg class="reel-court" width="100%" height="100%" viewBox="0 0 200 300"><line x1="20" y1="0" x2="20" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="180" y1="0" x2="180" y2="300" stroke="#7c3aed" stroke-width="0.5"/><line x1="0" y1="150" x2="200" y2="150" stroke="#c4f72a" stroke-width="0.5"/><line x1="100" y1="100" x2="100" y2="200" stroke="#7c3aed" stroke-width="0.3"/></svg>
         <div class="reel-overlay"><div class="reel-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         <div class="reel-content"><div class="reel-tag">Tactics</div><div class="reel-title">Court Awareness</div></div>
-      </a>
+      </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal-overlay" id="videoModal" onclick="if(event.target===this)closeVideoModal()">
+      <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+      <div class="video-modal">
+        <div class="video-modal-player">
+          <video id="modalVideo" controls playsinline></video>
+        </div>
+        <div class="video-modal-info">
+          <div class="video-modal-tag" id="modalTag"></div>
+          <div class="video-modal-title" id="modalTitle"></div>
+          <div class="video-modal-desc" id="modalDesc"></div>
+        </div>
+      </div>
     </div>
     <div class="community-row anim-hidden">
       <div class="community-stat"><div class="community-dot"></div><span class="community-label">Growing Community</span></div>
@@ -991,25 +1055,42 @@
       </div>
     </div>
 
-    <!-- Submit review form -->
+    <!-- Auth + Review form -->
     <div class="review-form-wrap glass-card">
-      <div class="review-form-title">Share Your Story</div>
-      <div class="review-form-desc">Tell the community about your experience and progress.</div>
-      <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
-        <div class="review-form-row">
-          <input type="text" id="revName" placeholder="Your name" required>
-          <input type="text" id="revRole" placeholder="Player level (e.g. Competitive, Junior)">
+      <!-- Login state -->
+      <div id="authSection">
+        <div class="review-form-title">Share Your Story</div>
+        <div class="review-form-desc">Sign in with Google to share your experience.</div>
+        <button onclick="googleSignIn()" class="review-submit" style="display:flex;align-items:center;justify-content:center;gap:10px;max-width:320px;margin:0 auto">
+          <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.28-3.14.76-4.59l-7.98-6.19A23.99 23.99 0 0 0 0 24c0 3.77.87 7.35 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Sign in with Google
+        </button>
+      </div>
+
+      <!-- Review form (hidden until logged in) -->
+      <div id="reviewFormSection" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <img id="userAvatar" src="" alt="" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--purple)">
+            <span id="userName" style="color:white;font-weight:600;font-size:15px"></span>
+          </div>
+          <button onclick="googleSignOut()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:var(--gray-400);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px">Sign out</button>
         </div>
-        <textarea id="revText" placeholder="Write your review..." required></textarea>
-        <label class="review-file-label">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <span id="fileLabel">Upload a photo or video (optional)</span>
-          <input type="file" id="revFile" accept="image/*,video/*" onchange="previewFile(this)">
-        </label>
-        <div class="review-preview" id="revPreview"></div>
-        <button type="submit" class="review-submit">Submit Review</button>
-      </form>
-      <div class="review-success" id="reviewSuccess">Thank you! Your review has been submitted.</div>
+        <div class="review-form-title">Share Your Story</div>
+        <div class="review-form-desc">Tell the community about your experience and progress.</div>
+        <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
+          <input type="text" id="revRole" placeholder="Player level (e.g. Competitive, Junior)">
+          <textarea id="revText" placeholder="Write your review..." required></textarea>
+          <label class="review-file-label">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span id="fileLabel">Upload a photo (optional)</span>
+            <input type="file" id="revFile" accept="image/*" onchange="previewFile(this)">
+          </label>
+          <div class="review-preview" id="revPreview"></div>
+          <button type="submit" class="review-submit" id="submitBtn">Submit Review</button>
+        </form>
+        <div class="review-success" id="reviewSuccess">Thank you! Your review has been submitted.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1129,54 +1210,93 @@ function previewFile(input) {
       preview.style.display = 'block';
       if (file.type.startsWith('image/')) {
         preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
-      } else if (file.type.startsWith('video/')) {
-        preview.innerHTML = '<video src="' + e.target.result + '" controls muted style="max-width:100%;max-height:150px;border-radius:10px"></video>';
       }
     };
     reader.readAsDataURL(file);
   } else {
-    label.textContent = 'Upload a photo or video (optional)';
+    label.textContent = 'Upload a photo (optional)';
     preview.style.display = 'none';
   }
 }
 
 function submitReview(e) {
+  // handled by Firebase script below
   e.preventDefault();
-  var name = document.getElementById('revName').value;
-  var role = document.getElementById('revRole').value || 'Player';
-  var text = document.getElementById('revText').value;
-  var fileInput = document.getElementById('revFile');
-  var grid = document.getElementById('reviewsGrid');
+}
 
-  var card = document.createElement('div');
-  card.className = 'review-card glass-card visible';
-  var initial = name.charAt(0).toUpperCase();
-  var mediaHtml = '';
+// ===== VIDEO MODAL =====
+var videoData = [
+  {
+    tag: 'Technique',
+    title: 'Serve Analysis',
+    desc: 'Breaking down the serve frame by frame. Understanding the kinetic chain, toss placement, and contact point is what separates a good serve from a weapon. We identify what needs adjusting and build a clear action plan.',
+    src: ''
+  },
+  {
+    tag: 'Strategy',
+    title: 'Match Strategy',
+    desc: 'Winning matches isn\'t about hitting harder — it\'s about making better decisions under pressure. We analyze patterns, tendencies, and tactical opportunities that most players overlook. Play with a plan, not just with hope.',
+    src: ''
+  },
+  {
+    tag: 'Mindset',
+    title: 'Mental Game',
+    desc: 'The mental side of tennis is where matches are truly won or lost. Managing pressure, staying present between points, and building competitive resilience — these are trainable skills, not just talent. We address them head on.',
+    src: ''
+  },
+  {
+    tag: 'Fitness',
+    title: 'Duglas Cordero',
+    desc: 'I cannot recommend Duglas Cordero highly enough. He is, without a doubt, the best fitness trainer on the tour, and one of the most passionate and positive individuals you could ever work with. I truly cannot imagine a team without him.',
+    src: 'duglas-cordero.mp4'
+  },
+  {
+    tag: 'Improvement',
+    title: 'Return of Serve',
+    desc: 'The return is the most undercoached shot in tennis. Positioning, split-step timing, and read patterns are what allow you to neutralize even the biggest servers. We break down the mechanics and the decision-making behind an elite return.',
+    src: ''
+  },
+  {
+    tag: 'Tactics',
+    title: 'Court Awareness',
+    desc: 'Where you are on the court determines what shot you should play. Most players hit without thinking about geometry, angles, or recovery. We train the eyes before the hands — because awareness drives every tactical decision.',
+    src: ''
+  }
+];
 
-  if (fileInput.files && fileInput.files[0]) {
-    var file = fileInput.files[0];
-    var url = URL.createObjectURL(file);
-    if (file.type.startsWith('image/')) {
-      mediaHtml = '<div class="review-media"><img src="' + url + '" alt="Player media"></div>';
-    } else if (file.type.startsWith('video/')) {
-      mediaHtml = '<div class="review-media"><video src="' + url + '" controls muted playsinline></video></div>';
-    }
+function openVideoModal(index) {
+  var data = videoData[index];
+  var modal = document.getElementById('videoModal');
+  var video = document.getElementById('modalVideo');
+  document.getElementById('modalTag').textContent = data.tag;
+  document.getElementById('modalTitle').textContent = data.title;
+  document.getElementById('modalDesc').textContent = data.desc;
+
+  if (data.src) {
+    video.src = data.src;
+    video.style.display = 'block';
+    video.play();
+  } else {
+    video.src = '';
+    video.style.display = 'none';
   }
 
-  card.innerHTML = '<div class="review-card-header"><div class="review-avatar">' + initial + '</div><div><div class="review-name">' + name + '</div><div class="review-role">' + role + '</div></div></div><p class="review-text">"' + text + '"</p>' + mediaHtml;
-  grid.insertBefore(card, grid.firstChild);
-
-  // Reset form
-  document.getElementById('reviewForm').reset();
-  document.getElementById('revPreview').style.display = 'none';
-  document.getElementById('revPreview').innerHTML = '';
-  document.getElementById('fileLabel').textContent = 'Upload a photo or video (optional)';
-
-  // Show success
-  var success = document.getElementById('reviewSuccess');
-  success.style.display = 'block';
-  setTimeout(function() { success.style.display = 'none'; }, 3000);
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
+
+function closeVideoModal() {
+  var modal = document.getElementById('videoModal');
+  var video = document.getElementById('modalVideo');
+  video.pause();
+  video.src = '';
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideoModal();
+});
 
 // ===== SCROLL REVEAL =====
 (function() {
@@ -1209,6 +1329,174 @@ function submitReview(e) {
   window.addEventListener('scroll', checkReveal, { passive: true });
   checkReveal();
 })();
+</script>
+
+<!-- Firebase + Cloudinary Integration -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBxpxJKGw-ygqnIGryY0sqUgIOmwmI13AY",
+  authDomain: "next-level-ball.firebaseapp.com",
+  projectId: "next-level-ball",
+  storageBucket: "next-level-ball.firebasestorage.app",
+  messagingSenderId: "423968084012",
+  appId: "1:423968084012:web:62dc912b83f3b3821c4189"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+let currentUser = null;
+
+// Auth state
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  const authSection = document.getElementById('authSection');
+  const formSection = document.getElementById('reviewFormSection');
+  if (user) {
+    authSection.style.display = 'none';
+    formSection.style.display = 'block';
+    document.getElementById('userAvatar').src = user.photoURL || '';
+    document.getElementById('userName').textContent = user.displayName || 'Player';
+  } else {
+    authSection.style.display = 'block';
+    formSection.style.display = 'none';
+  }
+});
+
+// Google sign in/out
+window.googleSignIn = async () => {
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (err) {
+    if (err.code !== 'auth/popup-closed-by-user') {
+      alert('Error signing in. Please try again.');
+    }
+  }
+};
+
+window.googleSignOut = async () => {
+  await signOut(auth);
+};
+
+// Upload image to Cloudinary
+async function uploadToCloudinary(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', 'next_level_ball');
+  formData.append('folder', 'nlb-reviews');
+  const res = await fetch('https://api.cloudinary.com/v1_1/dmb6dulwo/image/upload', {
+    method: 'POST',
+    body: formData
+  });
+  const data = await res.json();
+  return data.secure_url;
+}
+
+// Submit review to Firestore
+window.submitReview = async (e) => {
+  e.preventDefault();
+  if (!currentUser) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    const role = document.getElementById('revRole').value || 'Player';
+    const text = document.getElementById('revText').value;
+    const fileInput = document.getElementById('revFile');
+    let imageUrl = '';
+
+    if (fileInput.files && fileInput.files[0]) {
+      btn.textContent = 'Uploading image...';
+      imageUrl = await uploadToCloudinary(fileInput.files[0]);
+    }
+
+    await addDoc(collection(db, 'reviews'), {
+      uid: currentUser.uid,
+      name: currentUser.displayName || 'Anonymous',
+      avatar: currentUser.photoURL || '',
+      role: role,
+      text: text,
+      imageUrl: imageUrl,
+      createdAt: serverTimestamp()
+    });
+
+    document.getElementById('reviewForm').reset();
+    document.getElementById('revPreview').style.display = 'none';
+    document.getElementById('revPreview').innerHTML = '';
+    document.getElementById('fileLabel').textContent = 'Upload a photo (optional)';
+
+    const success = document.getElementById('reviewSuccess');
+    success.style.display = 'block';
+    setTimeout(() => { success.style.display = 'none'; }, 3000);
+
+    await loadReviews();
+  } catch (err) {
+    alert('Error submitting review. Please try again.');
+    console.error(err);
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Submit Review';
+};
+
+// Load reviews from Firestore
+async function loadReviews() {
+  const grid = document.getElementById('reviewsGrid');
+  // Keep placeholder reviews, remove firebase ones
+  grid.querySelectorAll('.firebase-review').forEach(el => el.remove());
+
+  try {
+    const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+
+    snapshot.forEach((docSnap) => {
+      const r = docSnap.data();
+      const card = document.createElement('div');
+      card.className = 'review-card glass-card visible firebase-review';
+      card.dataset.id = docSnap.id;
+      card.dataset.uid = r.uid;
+
+      const initial = r.name ? r.name.charAt(0).toUpperCase() : '?';
+      const avatarHtml = r.avatar
+        ? '<img src="' + r.avatar + '" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--purple)">'
+        : '<div class="review-avatar">' + initial + '</div>';
+      const mediaHtml = r.imageUrl
+        ? '<div class="review-media"><img src="' + r.imageUrl + '" alt="Player photo"></div>'
+        : '';
+      const deleteHtml = (currentUser && currentUser.uid === r.uid)
+        ? '<button onclick="deleteReview(\'' + docSnap.id + '\')" style="position:absolute;top:12px;right:12px;background:none;border:none;color:var(--gray-500);cursor:pointer;font-size:18px;padding:4px" title="Delete">&times;</button>'
+        : '';
+
+      card.innerHTML = '<div style="position:relative">' + deleteHtml + '<div class="review-card-header">' + avatarHtml + '<div><div class="review-name">' + (r.name || 'Anonymous') + '</div><div class="review-role">' + (r.role || 'Player') + '</div></div></div><p class="review-text">"' + r.text + '"</p>' + mediaHtml + '</div>';
+      grid.insertBefore(card, grid.firstChild);
+    });
+  } catch (err) {
+    console.error('Error loading reviews:', err);
+  }
+}
+
+// Delete own review
+window.deleteReview = async (reviewId) => {
+  if (!confirm('Delete this review?')) return;
+  try {
+    await deleteDoc(doc(db, 'reviews', reviewId));
+    await loadReviews();
+  } catch (err) {
+    alert('Error deleting review.');
+    console.error(err);
+  }
+};
+
+// Load reviews on page load
+loadReviews();
 </script>
 </body>
 </html>
